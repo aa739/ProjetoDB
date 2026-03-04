@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 04, 2026 at 12:24 PM
+-- Generation Time: Mar 04, 2026 at 12:47 PM
 -- Server version: 12.2.2-MariaDB
 -- PHP Version: 8.5.3
 
@@ -29,10 +29,15 @@ USE `ReceitasDB`;
 -- Table structure for table `ingredientes`
 --
 
+DROP TABLE IF EXISTS `ingredientes`;
 CREATE TABLE `ingredientes` (
   `ingredientes_id` int(11) NOT NULL,
   `ingrediente_nome` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- RELATIONSHIPS FOR TABLE `ingredientes`:
+--
 
 --
 -- Dumping data for table `ingredientes`
@@ -77,12 +82,23 @@ INSERT INTO `ingredientes` (`ingredientes_id`, `ingrediente_nome`) VALUES
 -- Table structure for table `quantidade`
 --
 
+DROP TABLE IF EXISTS `quantidade`;
 CREATE TABLE `quantidade` (
   `id` int(11) NOT NULL,
   `receitas_id` int(11) NOT NULL,
   `ingredientes_id` int(11) NOT NULL,
   `unidade` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- RELATIONSHIPS FOR TABLE `quantidade`:
+--   `ingredientes_id`
+--       `ingredientes` -> `ingredientes_id`
+--   `receitas_id`
+--       `receitas` -> `receitas_id`
+--   `ingredientes_id`
+--       `ingredientes` -> `ingredientes_id`
+--
 
 --
 -- Dumping data for table `quantidade`
@@ -134,6 +150,7 @@ INSERT INTO `quantidade` (`id`, `receitas_id`, `ingredientes_id`, `unidade`) VAL
 -- Table structure for table `receitas`
 --
 
+DROP TABLE IF EXISTS `receitas`;
 CREATE TABLE `receitas` (
   `receitas_id` int(11) NOT NULL,
   `nome_receitas` varchar(30) NOT NULL,
@@ -141,6 +158,10 @@ CREATE TABLE `receitas` (
   `link` varchar(2083) DEFAULT NULL,
   `vegan` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- RELATIONSHIPS FOR TABLE `receitas`:
+--
 
 --
 -- Dumping data for table `receitas`
